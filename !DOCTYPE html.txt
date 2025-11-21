@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taekwondo Interactive</title>
+  <style>
+    .logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
+}
+
+    html, body {
+      scroll-behavior: auto !important;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+      text-align: center;
+      transition: background 0.5s ease-in-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 🌟 TEN FLOATING KOREAN SYMBOLS 🌟 */
+    .floating-taekwondo {
+      position: absolute;
+      width: 400px;
+      height: 500px;
+      opacity: 0.15;
+      background: url("https://leontaekwondo.co.uk/wp-content/uploads/2016/10/taekwondo-korean.png") center/contain no-repeat;
+      filter: drop-shadow(0 0 25px black);
+      z-index: 0;
+    }
+
+    /* Evenly distributed animations */
+    .t1 { animation: move1 50s ease-in-out infinite alternate; top: 10%; left: 10%; }
+    .t2 { animation: move2 52s ease-in-out infinite alternate; top: 20%; left: 70%; }
+    .t3 { animation: move3 54s ease-in-out infinite alternate; top: 30%; left: 40%; }
+    .t4 { animation: move4 56s ease-in-out infinite alternate; top: 65%; left: 25%; }
+    .t5 { animation: move5 58s ease-in-out infinite alternate; top: 75%; left: 75%; }
+    .t6 { animation: move6 60s ease-in-out infinite alternate; top: 45%; left: 55%; }
+    .t7 { animation: move7 62s ease-in-out infinite alternate; top: 5%; left: 50%; }
+    .t8 { animation: move8 64s ease-in-out infinite alternate; top: 50%; left: 5%; }
+    .t9 { animation: move9 66s ease-in-out infinite alternate; top: 85%; left: 60%; }
+    .t10 { animation: move10 68s ease-in-out infinite alternate; top: 35%; left: 85%; }
+
+    @keyframes move1 { 0%{transform:translate(0,0)rotate(0);}50%{transform:translate(30vw,20vh)rotate(180deg);}100%{transform:translate(-20vw,-10vh)rotate(360deg);} }
+    @keyframes move2 { 0%{transform:translate(10vw,10vh)rotate(0);}50%{transform:translate(-25vw,-20vh)rotate(150deg);}100%{transform:translate(20vw,30vh)rotate(360deg);} }
+    @keyframes move3 { 0%{transform:translate(-10vw,5vh)rotate(0);}50%{transform:translate(25vw,-25vh)rotate(200deg);}100%{transform:translate(-15vw,25vh)rotate(360deg);} }
+    @keyframes move4 { 0%{transform:translate(0,0)rotate(0);}50%{transform:translate(-20vw,25vh)rotate(120deg);}100%{transform:translate(20vw,-25vh)rotate(360deg);} }
+    @keyframes move5 { 0%{transform:translate(-15vw,-10vh)rotate(0);}50%{transform:translate(15vw,35vh)rotate(180deg);}100%{transform:translate(-10vw,-35vh)rotate(360deg);} }
+    @keyframes move6 { 0%{transform:translate(10vw,-15vh)rotate(0);}50%{transform:translate(-20vw,30vh)rotate(200deg);}100%{transform:translate(15vw,-30vh)rotate(360deg);} }
+    @keyframes move7 { 0%{transform:translate(0,0)rotate(0);}50%{transform:translate(25vw,-25vh)rotate(160deg);}100%{transform:translate(-25vw,20vh)rotate(360deg);} }
+    @keyframes move8 { 0%{transform:translate(0,0)rotate(0);}50%{transform:translate(20vw,20vh)rotate(120deg);}100%{transform:translate(-20vw,-20vh)rotate(360deg);} }
+    @keyframes move9 { 0%{transform:translate(0,0)rotate(0);}50%{transform:translate(-15vw,25vh)rotate(180deg);}100%{transform:translate(15vw,-25vh)rotate(360deg);} }
+    @keyframes move10 { 0%{transform:translate(0,0)rotate(0);}50%{transform:translate(25vw,30vh)rotate(200deg);}100%{transform:translate(-25vw,-30vh)rotate(360deg);} }
+
+    .header {
+      background: black;
+      padding: 20px;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+
+    .main, .history-page {
+      padding: 20px;
+      min-height: 100vh;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      display: none;
+      position: relative;
+      z-index: 2;
+    }
+
+    .active {
+      display: block !important;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    .move img, .image-section img, .history-section img {
+      max-width: 250px;
+      border-radius: 10px;
+      margin: 10px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .move img:hover, .history-section img:hover {
+      transform: scale(1.05);
+    }
+
+    .info-section button {
+      margin: 10px;
+      padding: 12px 24px;
+      background: linear-gradient(45deg, #000, #444);
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .info-section button:hover {
+      background: linear-gradient(45deg, #444, #000);
+      transform: scale(1.05);
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: black;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #444;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .floating-taekwondo {
+        width: 200px;
+        height: 250px;
+        opacity: 0.1;
+      }
+      .header h1 { font-size: 22px; }
+      .header p { font-size: 14px; }
+      .move img { max-width: 180px; }
+      .info-section button {
+        width: 90%;
+        font-size: 14px;
+        padding: 10px 15px;
+      }
+      .image-section img { max-width: 80%; }
+      body { font-size: 15px; }
+    }
+    /* 🔥 Fade Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🥇 Timeline Modern Style */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.step {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.6);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: fadeIn 1.2s ease;
+}
+
+.step .icon {
+  font-size: 30px;
+  font-weight: bold;
+  background: black;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.step .content h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.step .content p {
+  margin: 5px 0 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+/* 🌟 SAFE OLYMPIC-STYLE ICON */
+.custom-olympic-icon {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px auto 25px;
+  position: relative;
+}
+
+.custom-olympic-icon .ring {
+  width: 35px;
+  height: 35px;
+  border: 4px solid;
+  border-radius: 50%;
+  animation: pulseRing 2.2s infinite ease-in-out;
+  opacity: 0.9;
+}
+
+/* Colors — similar vibe but SAFE (not Olympic color order) */
+.r1 { border-color: #ff4500; animation-delay: 0s; }     /* Orange Red */
+.r2 { border-color: #1e90ff; animation-delay: 0.2s; }   /* Dodger Blue */
+.r3 { border-color: #32cd32; animation-delay: 0.4s; }   /* Lime Green */
+.r4 { border-color: #ffd700; animation-delay: 0.6s; }   /* Gold */
+.r5 { border-color: #9400d3; animation-delay: 0.8s; }   /* Violet */
+
+/* Animation */
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+.wt-link-glow {
+  color: #1e90ff;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.wt-link-glow:hover {
+  color: #63b3ff;
+  text-shadow: 0px 0px 8px rgba(30,144,255,0.8);
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- 🌟 10 Floating Korean Text Backgrounds -->
+  <div class="floating-taekwondo t1"></div>
+  <div class="floating-taekwondo t2"></div>
+  <div class="floating-taekwondo t3"></div>
+  <div class="floating-taekwondo t4"></div>
+  <div class="floating-taekwondo t5"></div>
+  <div class="floating-taekwondo t6"></div>
+  <div class="floating-taekwondo t7"></div>
+  <div class="floating-taekwondo t8"></div>
+  <div class="floating-taekwondo t9"></div>
+  <div class="floating-taekwondo t10"></div>
+
+  <!-- HEADER -->
+  <!-- HEADER -->
+<div class="header">
+  <img src="https://files.chatgptusercontent.com/file_46669455-82fb-4046-b040-12b1b2e1fad2.png" 
+     alt="Deoria Taekwondo Logo" class="logo">
+
+
+  <h1>🥋 Deoria Taekwondo</h1>
+  <p>Feel the Power. Embrace the Discipline.</p>
+</div>
+
+
+  <!-- MAIN PAGE -->
+  <div id="mainPage" class="main active">
+    <!-- 🌟 WELCOME MESSAGE SECTION 🌟 -->
+<section class="welcome-section" style="
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+">
+  <h2 style="font-size: 28px; margin-bottom: 15px;">👋 Welcome to Deoria Taekwondo!</h2>
+
+  <p style="font-size: 17px; line-height: 1.6;">
+    We are proud to train inside the prestigious 
+    <b>Ravindra Kishore Shahi Sports Stadium, Deoria</b> — known for supporting young athletes, discipline, and fitness culture in our district.
+  </p>
+
+  <p style="font-size: 17px; line-height: 1.6; margin-top: 15px;">
+    At <b>Deoria Taekwondo</b>, our goal is simple:
+    to develop strength, speed, flexibility, self-confidence, and indomitable spirit 
+    in every student. Taekwondo is not just a martial art — 
+    it is a complete lifestyle that teaches respect, discipline, focus, and mental clarity.
+  </p>
+
+  <p style="font-size: 17px; line-height: 1.6; margin-top: 15px;">
+    Whether you're a beginner or an advanced fighter, our training is designed 
+    to help you master high kicks, spinning techniques, and Olympic-style sparring 
+    in a safe and motivating environment.  
+    <b>Welcome to the journey — Taekwondo starts with a strong mind and a strong heart.</b>
+  </p>
+</section>
+<!-- 🌍 MODERN OLYMPIC TAEKWONDO SECTION -->
+<section class="olympic-modern" style="
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffffaa, #eeeeeecc);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  animation: fadeIn 1.3s ease;
+">
+<div class="custom-olympic-icon">
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="ring r3"></div>
+  <div class="ring r4"></div>
+  <div class="ring r5"></div>
+</div>
+
+  <h2 style="font-size: 30px; margin-bottom: 10px; font-weight: bold;">
+    🥋 Taekwondo in the Olympics
+  </h2>
+  <p style="font-size: 18px; line-height: 1.7;">
+    Taekwondo entered the <b>Olympics in Sydney 2000</b> and is now one of the most 
+    dynamic full-contact martial arts in the world.  
+    Governed by 
+<a href="https://worldtaekwondo.org" target="_blank" class="wt-link-glow">
+  World Taekwondo (WT)
+</a>
+, it uses electronic scoring, fast kicking techniques, 
+    and high-level athletic performance.
+  </p>
+
+  <div style="margin-top: 25px;">
+    <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">🔥 Olympic Taekwondo Features</h3>
+    <div style="display: flex; flex-direction: column; gap: 12px; text-align: left; font-size: 17px;">
+      <div>✔ Full-contact WT sparring</div>
+      <div>✔ Electronic headgear & chest protector scoring</div>
+      <div>✔ Speed, timing & spinning kick emphasis</div>
+      <div>✔ 3 rounds, sensor-based points</div>
+      <div>✔ High-performance athletic training</div>
+    </div>
+  </div>
+
+  <hr style="margin: 30px 0; border: none; height: 2px; background: #333;">
+
+  <h2 style="font-size: 28px; margin-bottom: 15px; font-weight: bold;">
+    🏆 How to Reach the Olympics (India Pathway)
+  </h2>
+
+  <!-- Timeline -->
+  <div class="timeline">
+
+    <div class="step">
+      <div class="icon">1️⃣</div>
+      <div class="content">
+        <h3>District Level</h3>
+        <p>Start competing in district tournaments through local associations or sports stadium events.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon">2️⃣</div>
+      <div class="content">
+        <h3>State Championships</h3>
+        <p>Medalists at district level qualify for the State Taekwondo Championships.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon">3️⃣</div>
+      <div class="content">
+        <h3>National Level</h3>
+        <p>Compete in SGFI, CBSE Nationals, All India Inter-University, and TFI National Championships.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon">4️⃣</div>
+      <div class="content">
+        <h3>International Events</h3>
+        <p>Participate in WT G1, G2, Asian Championships & Grand Prix events to earn ranking points.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon">5️⃣</div>
+      <div class="content">
+        <h3>Indian National Team</h3>
+        <p>Top ranked athletes are selected by the federation to represent India globally.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon">6️⃣</div>
+      <div class="content">
+        <h3>Olympic Qualification</h3>
+        <p>Qualify via WT world ranking or Continental Olympic Qualification Tournaments.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="margin-top: 25px; font-size: 18px; font-weight: bold; color: #000;">
+    ⭐ With dedication, discipline, the right coach & consistent training,  
+    even a student from <b>Deoria</b> can reach the Olympic dream.
+  </p>
+  
+  
+</section>
+
+
+    <div class="taekwondo-animations">
+      <h2>🔥 Taekwondo in Action</h2>
+
+      <div class="move">
+        <img src="https://tse4.mm.bing.net/th/id/OIF.ay5mwK5Ax86CC1agVtkFvw?rs=1&pid=ImgDetMain&o=7&rm=3" alt="High Kick" />
+        <p>Spinning High Kick</p>
+      </div>
+
+      <div class="move">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.SyKtwJmmXgdQjg-3zLiagwHaI4?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Punch Combo" />
+        <p>Fast Punch Combo</p>
+      </div>
+
+      <div class="move">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.cPt4vN-SKBhrR6Cf8LMkhgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Side Kick" />
+        <p>Jump Side Kick</p>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>What is Taekwondo?</h2>
+      <p>
+        Taekwondo is a Korean martial art known for its high, fast kicks and powerful strikes.
+        It emphasizes discipline, respect, and mental focus.
+      </p>
+
+      <button id="historyBtn">Taekwondo History 📜</button>
+      <button id="deoriaBtn">Taekwondo Deoria 🌆</button>
+      <button id="domainsBtn">Domains 🧩</button>
+
+    </div>
+
+    <div class="image-section">
+      <img src="https://i.pinimg.com/originals/ab/47/89/ab4789c84c67b04ef90fd33173e9f946.gif" alt="Taekwondo Kick" />
+    </div>
+  </div>
+
+  <!-- HISTORY PAGE -->
+  <div id="historyPage" class="history-page">
+    <div class="header">
+      <h1>📜 The History of Taekwondo</h1>
+      <p>Discover the roots of the Korean martial art</p>
+    </div>
+
+    <div class="history-section">
+      <h2>Origins</h2>
+      <p>
+        Taekwondo originated in Korea over 2,000 years ago, evolving from ancient martial practices.
+        It emphasizes respect, discipline, and powerful kicking techniques.
+      </p>
+      <img src="https://taekwondohalloffame.com/wp-content/uploads/2011/05/shin23.jpg" alt="Ancient Training" />
+    </div>
+
+    <div class="history-section">
+      <h2>Modern Development</h2>
+      <p>
+        In the 20th century, Taekwondo was systematized and became a global martial art, officially
+        recognized as an Olympic sport in 2000.
+      </p>
+      <img src="https://images.squarespace-cdn.com/content/v1/65a8a7ed82ff1b1dacfd0689/ccd5019c-0b83-4e68-bbb9-6da2d67140c6/Taekwondo+in+the+Sunset+-+Taekwondo+Brandon.jpg?format=1000w" alt="Modern Taekwondo" />
+    </div>
+
+    <div class="history-section">
+      <h2>Philosophy</h2>
+      <p>
+        Taekwondo is not just about fighting — it teaches harmony of mind, body, and spirit. 
+        The five principles are courtesy, integrity, perseverance, self-control, and indomitable spirit.
+      </p>
+      <img src="https://i.pinimg.com/originals/f8/f4/6d/f8f46df68234efed72aa01793f3ee587.jpg" alt="Taekwondo Philosophy" />
+    </div>
+
+    <a href="#" class="back-btn" id="backBtn">⬅ Back to Home</a>
+  </div>
+
+  <!-- DEORIA PAGE -->
+  <div id="deoriaPage" class="history-page" style="display:none;">
+    <div class="header">
+      <h1>🥋 Taekwondo in Deoria</h1>
+      <p>Meet the champions and rising stars from Deoria!</p>
+    </div>
+
+    <div class="history-section">
+      <h2>Local Heroes</h2>
+      <p>Deoria has produced some of the most passionate Taekwondo athletes who have represented at district and state levels.</p>
+      
+      <img src="https://tse4.mm.bing.net/th/id/OIP.3M3KvhzUuHz-Pkz0x4xw1wHaE8?rs=1&pid=ImgDetMain" alt="Deoria Team" />
+
+      <h3>🏅 Featured Players</h3>
+      <div class="move">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.yIEX2eFF-ZWTXmdrE0XnfgHaE7?rs=1&pid=ImgDetMain" alt="Player 1">
+        <p><b>Rohan Singh</b> – State-level medalist and black belt holder.</p>
+      </div>
+
+      <div class="move">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.XGqRJW3LBqNvmWvI2gR7NwHaE8?rs=1&pid=ImgDetMain" alt="Player 2">
+        <p><b>Ananya Verma</b> – Represented Deoria in the National Taekwondo Championship 2023.</p>
+      </div>
+    </div>
+
+    <a href="#" class="back-btn" id="backBtnDeoria">⬅ Back to Home</a>
+  </div>
+<!-- DOMAINS PAGE -->
+<div id="domainsPage" class="history-page" style="display:none;">
+  <div class="header">
+    <h1>🧩 Taekwondo Domains</h1>
+    <p>Learn the different components of Taekwondo training</p>
+  </div>
+
+  <div class="history-section">
+    <h2>1️⃣ Kyorugi (Sparring)</h2>
+    <p>
+      Kyorugi is Olympic-style full-contact sparring. It focuses on timing, speed,
+      distance control, and scoring using kicks and punches. It uses electronic
+      sensors and protective gear for safe competition.
+    </p>
+    <img src="https://tse3.mm.bing.net/th/id/OIP.JG2lgcLEaMOdY1lPpM1QkQHaEK?rs=1&pid=ImgDetMain" />
+  </div>
+
+  <div class="history-section">
+    <h2>2️⃣ Poomsae (Forms)</h2>
+    <p>
+      Poomsae are pre-arranged sequences of movements that develop technique,
+      balance, focus, and precision. They represent the philosophical and technical
+      roots of Taekwondo.
+    </p>
+    <img src="https://tse1.mm.bing.net/th/id/OIP.Madx3bY5zppMWD3FAC2nVgHaE8?rs=1&pid=ImgDetMain" />
+  </div>
+
+  <div class="history-section">
+    <h2>3️⃣ Kyokpa (Breaking)</h2>
+    <p>
+      Breaking demonstrates power, accuracy, and technique by striking boards,
+      tiles, or other materials. It tests mental focus and perfect execution.
+    </p>
+    <img src="https://tse1.mm.bing.net/th/id/OIP.2BDg-de8kOglYv3gZH3lPQHaE8?rs=1&pid=ImgDetMain" />
+  </div>
+
+  <div class="history-section">
+    <h2>4️⃣ Hoshinsul (Self-Defense)</h2>
+    <p>
+      Practical self-defense techniques against grabs, holds, and real-life
+      attacks. Focuses on leverage, speed, and disabling an opponent safely.
+    </p>
+    <img src="https://tse3.mm.bing.net/th/id/OIP.FEfLh3mlwjL4vHQL0N7rWwHaE8?rs=1&pid=ImgDetMain" />
+  </div>
+
+  <div class="history-section">
+    <h2>5️⃣ Kibon (Basic Techniques)</h2>
+    <p>
+      Kibon includes foundational stances, kicks, blocks, and strikes. These
+      basics build strength, discipline, and technical mastery.
+    </p>
+    <img src="https://tse1.mm.bing.net/th/id/OIP.utlBWttqh_RyCCU-fod2lgHaE7?rs=1&pid=ImgDetMain" />
+  </div>
+
+  <a href="#" class="back-btn" id="backBtnDomains">⬅ Back to Home</a>
+</div>
+
+  <!-- IMAGE POPUP -->
+  <div id="imagePopup" style="
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  ">
+    <img id="popupImg" src="" style="
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      transform: scale(0.8);
+      opacity: 0;
+      transition: all 0.4s ease;
+    ">
+  </div>
+
+  <script>
+    const mainPage = document.getElementById("mainPage");
+    const historyPage = document.getElementById("historyPage");
+    const deoriaPage = document.getElementById("deoriaPage");
+    const historyBtn = document.getElementById("historyBtn");
+    const backBtn = document.getElementById("backBtn");
+    const deoriaBtn = document.getElementById("deoriaBtn");
+    const backBtnDeoria = document.getElementById("backBtnDeoria");
+    const popup = document.getElementById("imagePopup");
+    const popupImg = document.getElementById("popupImg");
+    const domainsBtn = document.getElementById("domainsBtn");
+    const domainsPage = document.getElementById("domainsPage");
+    const backBtnDomains = document.getElementById("backBtnDomains");
+
+    historyBtn.addEventListener("click", () => switchPage(mainPage, historyPage));
+    backBtn.addEventListener("click", e => { e.preventDefault(); switchPage(historyPage, mainPage); });
+    deoriaBtn.addEventListener("click", () => switchPage(mainPage, deoriaPage));
+    backBtnDeoria.addEventListener("click", e => { e.preventDefault(); switchPage(deoriaPage, mainPage); });
+domainsBtn.addEventListener("click", () => switchPage(mainPage, domainsPage));
+backBtnDomains.addEventListener("click", e => {
+  e.preventDefault();
+  switchPage(domainsPage, mainPage);
+});
+
+    function switchPage(hide, show) {
+      hide.classList.remove("active");
+      setTimeout(() => {
+        hide.style.display = "none";
+        show.style.display = "block";
+        setTimeout(() => show.classList.add("active"), 50);
+        window.scrollTo(0, 0);
+      }, 500);
+    }
+
+    document.querySelectorAll("img").forEach(img => {
+      img.addEventListener("click", () => {
+        popup.style.display = "flex";
+        popupImg.src = img.src;
+        setTimeout(() => {
+          popupImg.style.transform = "scale(1)";
+          popupImg.style.opacity = "1";
+        }, 50);
+      });
+    });
+
+    popup.addEventListener("click", () => {
+      popupImg.style.transform = "scale(0.8)";
+      popupImg.style.opacity = "0";
+      setTimeout(() => popup.style.display = "none", 300);
+    });
+  </script>
+</body>
+</html>
