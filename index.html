@@ -243,6 +243,71 @@
   text-shadow: 0px 0px 8px rgba(30,144,255,0.8);
   cursor: pointer;
 }
+/* ============================
+   FULL WIDTH STATUS SLIDER
+=============================== */
+
+.wt-slider {
+  width: 100%;
+  height: 85vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.wt-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.wt-slide.active {
+  opacity: 1;
+}
+
+.wt-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wt-caption {
+  position: absolute;
+  bottom: 100px;
+  left: 40px;
+  color: white;
+  text-shadow: 0px 4px 10px black;
+}
+
+.wt-caption h2 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.wt-caption p {
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+/* Progress Bar */
+.wt-progress-container {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  width: 90%;
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.wt-progress {
+  width: 0%;
+  height: 100%;
+  background: white;
+  transition: width linear;
+}
 
   </style>
 </head>
@@ -263,7 +328,7 @@
   <!-- HEADER -->
   <!-- HEADER -->
 <div class="header">
-  <img src=https://raw.githubusercontent.com/RohanTkd-ux/My-first-web-tkd1/refs/heads/main/ChatGPT%20Image%20Nov%2022%2C%202025%2C%2001_17_59%20AM.png
+  <img src=https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/a56c0ac4-a6a0-4b51-a197-9ccc21ee9bd9.png
      alt="Deoria Taekwondo Logo" class="logo">
 
 
@@ -305,7 +370,74 @@
     in a safe and motivating environment.  
     <b>Welcome to the journey — Taekwondo starts with a strong mind and a strong heart.</b>
   </p>
+  
 </section>
+
+<!-- ⭐ STATUS / HIGHLIGHTS SECTION (satus image yha h) -->
+<!-- ============================
+     FULL WIDTH STATUS SLIDER
+=============================== -->
+</section>
+<!-- ============================
+     FULL WIDTH STATUS SLIDER
+=============================== -->
+<div class="wt-slider">
+  
+  <!-- Slide 1 -->
+  <div class="wt-slide active">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/WhatsApp%20Image%202025-11-22%20at%2011.00.59_ae47f669.jpg" class="wt-img">
+    <div class="wt-caption">
+      <h2>Your Title 1</h2>
+      <p>Your description 1</p>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="wt-slide">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/WhatsApp%20Image%202025-11-22%20at%2011.00.59_4f76d1b3.jpg" class="wt-img">
+    <div class="wt-caption">
+      <h2>Your Title 2</h2>
+      <p>Your description 2</p>
+    </div>
+  </div>
+
+  <!-- Slide 3 (FIXED) -->
+  <div class="wt-slide">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/WhatsApp%20Image%202025-11-22%20at%2013.25.26_7e633163.jpg" class="wt-img">
+    <div class="wt-caption">
+      <h2>Your Title 3</h2>
+      <p>Your description 3</p>
+    </div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="wt-slide">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/WhatsApp%20Image%202025-11-22%20at%2013.25.26_3410e99a.jpg" class="wt-img">
+    <div class="wt-caption">
+      <h2>Your Title 4</h2>
+      <p>Your description 4</p>
+    </div>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="wt-slide">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/WhatsApp%20Image%202025-11-22%20at%2013.25.27_6387ef28.jpg" class="wt-img">
+    <div class="wt-caption">
+      <h2>Your Title 5</h2>
+      <p>Your description 5</p>
+    </div>
+  </div>
+
+  <!-- Progress Bars -->
+  <div class="wt-progress-container">
+    <div class="wt-progress"></div>
+  </div>
+
+</div>
+
+
+</section>
+
 <!-- 🌍 MODERN OLYMPIC TAEKWONDO SECTION -->
 <section class="olympic-modern" style="
   max-width: 900px;
@@ -649,6 +781,43 @@ backBtnDomains.addEventListener("click", e => {
       popupImg.style.opacity = "0";
       setTimeout(() => popup.style.display = "none", 300);
     });
+    // STATUS SECTION POPUP VIEW
+document.querySelectorAll(".status-img").forEach(img => {
+  img.addEventListener("click", () => {
+    popup.style.display = "flex";
+    popupImg.src = img.src;
+    popupImg.style.transform = "scale(1)";
+    popupImg.style.opacity = "1";
+  });
+});
+/* ============================
+   SLIDER LOGIC
+=============================== */
+
+let wtIndex = 0;
+let wtSlides = document.querySelectorAll(".wt-slide");
+let wtProgress = document.querySelector(".wt-progress");
+
+function showSlide() {
+  wtSlides.forEach(s => s.classList.remove("active"));
+  wtSlides[wtIndex].classList.add("active");
+
+  // Restart progress bar animation
+  wtProgress.style.transition = "none";
+  wtProgress.style.width = "0%";
+  setTimeout(() => {
+    wtProgress.style.transition = "width 4.5s linear";
+    wtProgress.style.width = "100%";
+  }, 50);
+
+  // Next slide
+  wtIndex = (wtIndex + 1) % wtSlides.length;
+}
+
+showSlide();
+setInterval(showSlide, 5000);
+
+
   </script>
 </body>
 </html>
