@@ -347,6 +347,44 @@
   }
 }
 
+.dragon-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.dragon-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: none;     /* No circle */
+  padding: 0;
+  box-shadow: none;      /* No white glow */
+  filter: none;          /* No drop shadow */
+}
+
+
+.main-logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(255,255,255,0.5);
+}
+
+@media(max-width:768px) {
+  .dragon-circle {
+    width: 80px;
+    height: 80px;
+  }
+  .main-logo {
+    width: 110px;
+    height: 110px;
+  }
+}
 
   </style>
 </head>
@@ -354,7 +392,7 @@
 
   <!-- 🌟 10 Floating Korean Text Backgrounds -->
   <div class="floating-taekwondo t1"></div>
-  <div class="floating-taekwondo t2"></div>
+  <div class="floating-taekwondo t2"></div> 
   <div class="floating-taekwondo t3"></div>
   <div class="floating-taekwondo t4"></div>
   <div class="floating-taekwondo t5"></div>
@@ -366,14 +404,19 @@
 
   <!-- HEADER -->
   <!-- HEADER -->
-<div class="header">
-  <img src=https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/a56c0ac4-a6a0-4b51-a197-9ccc21ee9bd9.png
-     alt="Deoria Taekwondo Logo" class="logo">
+<<div class="header">
 
+  <div class="dragon-logo-container">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/right%20faced%20dragon.png" class="dragon-circle">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/a56c0ac4-a6a0-4b51-a197-9ccc21ee9bd9.png" class="main-logo">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/left%20faced%20dragon%20ori.png" class="dragon-circle">
+  </div>
 
-  <h1>🥋 Deoria Taekwondo</h1>
+  <h1>Deoria Taekwondo</h1>
   <p>Feel the Power. Embrace the Discipline.</p>
+
 </div>
+
 
 
   <!-- MAIN PAGE -->
