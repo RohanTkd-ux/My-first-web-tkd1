@@ -828,25 +828,49 @@
     const domainsPage = document.getElementById("domainsPage");
     const backBtnDomains = document.getElementById("backBtnDomains");
 
-    historyBtn.addEventListener("click", () => switchPage(mainPage, historyPage));
-    backBtn.addEventListener("click", e => { e.preventDefault(); switchPage(historyPage, mainPage); });
-    deoriaBtn.addEventListener("click", () => switchPage(mainPage, deoriaPage));
-    backBtnDeoria.addEventListener("click", e => { e.preventDefault(); switchPage(deoriaPage, mainPage); });
-domainsBtn.addEventListener("click", () => switchPage(mainPage, domainsPage));
-backBtnDomains.addEventListener("click", e => {
+    // OPEN PAGES (push history)
+historyBtn.addEventListener("click", () =>
+  switchPage(mainPage, historyPage, "history")
+);
+
+deoriaBtn.addEventListener("click", () =>
+  switchPage(mainPage, deoriaPage, "deoria")
+);
+
+domainsBtn.addEventListener("click", () =>
+  switchPage(mainPage, domainsPage, "domains")
+);
+
+// BACK BUTTONS (go home)
+backBtn.addEventListener("click", e => {
   e.preventDefault();
-  switchPage(domainsPage, mainPage);
+  history.back();
 });
 
-    function switchPage(hide, show) {
-      hide.classList.remove("active");
-      setTimeout(() => {
-        hide.style.display = "none";
-        show.style.display = "block";
-        setTimeout(() => show.classList.add("active"), 50);
-        window.scrollTo(0, 0);
-      }, 500);
-    }
+backBtnDeoria.addEventListener("click", e => {
+  e.preventDefault();
+  history.back();
+});
+
+backBtnDomains.addEventListener("click", e => {
+  e.preventDefault();
+  history.back();
+});
+
+    function switchPage(hide, show, pageName) {
+  hide.classList.remove("active");
+
+  setTimeout(() => {
+    hide.style.display = "none";
+    show.style.display = "block";
+    setTimeout(() => show.classList.add("active"), 50);
+    window.scrollTo(0, 0);
+
+    // ✅ Push page state
+    history.pushState({ page: pageName }, "", `#${pageName}`);
+  }, 300);
+}
+
 
     document.querySelectorAll(".move img, .history-section img, .image-section img").forEach(img => {
 
@@ -901,6 +925,44 @@ function showSlide() {
 showSlide();
 setInterval(showSlide, 5000);
 
+function switchPage(hide, show, pageName) {
+  hide.classList.remove("active");
+
+  setTimeout(() => {
+    hide.style.display = "none";
+    show.style.display = "block";
+    setTimeout(() => show.classList.add("active"), 50);
+    window.scrollTo(0, 0);
+
+    if (pageName) {
+      history.pushState({ page: pageName }, "", `#${pageName}`);
+    }
+  }, 300);
+}
+history.replaceState({ page: "home" }, "", "#home");
+window.addEventListener("popstate", (event) => {
+  [mainPage, historyPage, deoriaPage, domainsPage].forEach(p => {
+    p.style.display = "none";
+    p.classList.remove("active");
+  });
+
+  if (!event.state || event.state.page === "home") {
+    mainPage.style.display = "block";
+    mainPage.classList.add("active");
+  }
+  else if (event.state.page === "history") {
+    historyPage.style.display = "block";
+    historyPage.classList.add("active");
+  }
+  else if (event.state.page === "deoria") {
+    deoriaPage.style.display = "block";
+    deoriaPage.classList.add("active");
+  }
+  else if (event.state.page === "domains") {
+    domainsPage.style.display = "block";
+    domainsPage.classList.add("active");
+  }
+});
 
   </script>
 </body>
