@@ -404,16 +404,23 @@
   border-radius: 15px;
   overflow: hidden;
   cursor: pointer;
-  transform: scale(0.85);
+
   opacity: 0;
-  transition: all 0.8s ease;
+  transform: scale(0.8) translateY(50px);
+  transition:
+    opacity 1.6s ease,
+    transform 1.6s ease;
+
   box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 
 .photo-card.show {
-  transform: scale(1);
   opacity: 1;
+  transform: scale(1) translateY(0);
 }
+
+
+
 
 .photo-card img {
   width: 100%;
@@ -447,6 +454,119 @@
   .photo-overlay h2 { font-size: 22px; }
 }
 
+/* =========================
+   COACH HERO SECTION
+========================= */
+.coach-hero {
+  width: 100%;
+  height: 100vh;
+  background: url("https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/Girish%20Singh.jpg") 
+              center center / cover no-repeat;
+  position: relative;
+  margin: 40px 0;
+}
+
+/* Dark overlay */
+.coach-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.4),
+    rgba(0,0,0,0.75)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Content */
+.coach-content {
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 20px;
+
+  opacity: 0;
+  transform: translateY(60px);
+  transition:
+    opacity 1.6s ease,
+    transform 1.6s ease;
+}
+
+/* When visible */
+.coach-content.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.coach-label {
+  letter-spacing: 3px;
+  font-size: 14px;
+  color: #ffd700;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.coach-content h1 {
+  font-size: 48px;
+  margin: 10px 0 20px;
+  text-shadow: 0 6px 15px black;
+}
+
+.coach-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.coach-badges span {
+  background: rgba(255,255,255,0.15);
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 16px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.coach-quote {
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 15px;
+  opacity: 0.9;
+}
+
+/* Animation */
+@keyframes coachFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .coach-content h1 {
+    font-size: 32px;
+  }
+
+  .coach-badges span {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+
+  .coach-quote {
+    font-size: 16px;
+  }
+}
 
   </style>
 </head>
@@ -516,6 +636,28 @@
   </p>
   
 </section>
+<!-- 🥋 COACH PROFILE SECTION -->
+<section class="coach-hero">
+  <div class="coach-overlay">
+    <div class="coach-content">
+      <h3 class="coach-label">Head Coach</h3>
+      <h1>Mr. Girish Singh</h1>
+
+      <div class="coach-badges">
+        <span>🌍 International Athlete</span>
+        <span>🏅 National Referee</span>
+        <span>🥋 Black Belt – 2nd DAN</span>
+      </div>
+
+      <p class="coach-quote">
+        "A true martial artist builds character before medals."
+      </p>
+    </div>
+  </div>
+  
+</section>
+
+
 
 <!-- ⭐ STATUS / HIGHLIGHTS SECTION (satus image yha h) -->
 <!-- ============================
@@ -1093,6 +1235,27 @@ const observer = new IntersectionObserver(
 );
 
 observer.observe(photoCard);
+// Coach section animation on scroll
+// 🥋 Coach section smooth scroll animation
+const coachSection = document.querySelector(".coach-content");
+
+const coachObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show");
+      }
+    });
+  },
+  {
+    threshold: 0.35,
+    rootMargin: "0px 0px -120px 0px"
+  }
+);
+
+coachObserver.observe(coachSection);
 
   </script>
 </body>
