@@ -567,6 +567,46 @@
     font-size: 16px;
   }
 }
+/* =========================
+   WELCOME VIDEO SECTION
+========================= */
+
+.welcome-video-section {
+  position: relative;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+}
+
+/* Background video */
+.welcome-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Dark overlay (same feel as before) */
+.welcome-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
+
+/* Content stays EXACTLY same */
+.welcome-video-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+}
 
   </style>
 </head>
@@ -604,38 +644,43 @@
   <!-- MAIN PAGE -->
   <div id="mainPage" class="main active">
     <!-- 🌟 WELCOME MESSAGE SECTION 🌟 -->
-<section class="welcome-section" style="
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 25px;
-  margin: 20px auto;
-  max-width: 800px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
-  backdrop-filter: blur(4px);
-">
-  <h2 style="font-size: 28px; margin-bottom: 15px;">👋 Welcome to Deoria Taekwondo!</h2>
+<section class="welcome-video-section">
 
-  <p style="font-size: 17px; line-height: 1.6;">
-    We are proud to train inside the prestigious 
-    <b>Ravindra Kishore Shahi Sports Stadium, Deoria</b> — known for supporting young athletes, discipline, and fitness culture in our district.
-  </p>
+  <!-- 🎥 Background Video -->
+  <video autoplay muted loop playsinline class="welcome-bg-video">
+    <source src="https://res.cloudinary.com/dl4pvlmzt/video/upload/v1766046064/download_dxaewa.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-  <p style="font-size: 17px; line-height: 1.6; margin-top: 15px;">
-    At <b>Deoria Taekwondo</b>, our goal is simple:
-    to develop strength, speed, flexibility, self-confidence, and indomitable spirit 
-    in every student. Taekwondo is not just a martial art — 
-    it is a complete lifestyle that teaches respect, discipline, focus, and mental clarity.
-  </p>
+  <!-- Dark overlay for readability -->
+  <div class="welcome-video-overlay"></div>
 
-  <p style="font-size: 17px; line-height: 1.6; margin-top: 15px;">
-    Whether you're a beginner or an advanced fighter, our training is designed 
-    to help you master high kicks, spinning techniques, and Olympic-style sparring 
-    in a safe and motivating environment.  
-    <b>Welcome to the journey — Taekwondo starts with a strong mind and a strong heart.</b>
-  </p>
-  
+  <!-- Existing content (UNCHANGED) -->
+  <div class="welcome-video-content">
+    <h2 style="font-size: 28px; margin-bottom: 15px;">👋 Welcome to Deoria Taekwondo!</h2>
+
+    <p style="font-size: 17px; line-height: 1.6;">
+      We are proud to train inside the prestigious 
+      <b>Ravindra Kishore Shahi Sports Stadium, Deoria</b> — known for supporting young athletes, discipline, and fitness culture in our district.
+    </p>
+
+    <p style="font-size: 17px; line-height: 1.6; margin-top: 15px;">
+      At <b>Deoria Taekwondo</b>, our goal is simple:
+      to develop strength, speed, flexibility, self-confidence, and indomitable spirit 
+      in every student. Taekwondo is not just a martial art — 
+      it is a complete lifestyle that teaches respect, discipline, focus, and mental clarity.
+    </p>
+
+    <p style="font-size: 17px; line-height: 1.6; margin-top: 15px;">
+      Whether you're a beginner or an advanced fighter, our training is designed 
+      to help you master high kicks, spinning techniques, and Olympic-style sparring 
+      in a safe and motivating environment.  
+      <b>Welcome to the journey — Taekwondo starts with a strong mind and a strong heart.</b>
+    </p>
+  </div>
+
 </section>
+
 <!-- 🥋 COACH PROFILE SECTION -->
 <section class="coach-hero">
   <div class="coach-overlay">
