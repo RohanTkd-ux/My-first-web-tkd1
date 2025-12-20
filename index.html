@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Taekwondo Interactive</title>
+  
+
+  <!-- mobi icon ke liye kuch-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
     .logo {
   width: 150px;
@@ -22,7 +27,7 @@
       margin: 0;
       padding: 0;
       background-color: white;
-      color: black;
+      color: rgb(16, 15, 15);
       text-align: center;
       transition: background 0.5s ease-in-out;
       position: relative;
@@ -607,6 +612,268 @@
   color: white;
   text-align: center;
 }
+/* =========================
+   DESKTOP TOP BAR
+========================= */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding: 6px 16px;
+  background: #111;
+  color: #ccc;
+}
+
+.top-bar a {
+  color: #ccc;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.top-bar a:hover {
+  color: #ff3b3b;
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    display: none;
+  }
+}
+/* 🔝 Desktop Top Bar Icons - Larger & Clear */
+.top-bar .top-right a {
+  margin-left: 16px;
+  font-size: 18px;       /* 👈 makes icons larger */
+  color: #ccc;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.top-bar .top-right a:hover {
+  color: #ffffff;
+  transform: scale(1.15); /* 👈 subtle zoom on hover */
+}
+
+
+
+
+.desktop-nav {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 15px;
+}
+
+.desktop-nav a {
+  color: rgb(223, 14, 14);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.desktop-nav a:hover {
+  color: #ff3b3b;
+}
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+}
+
+
+
+.mobile-hamburger {
+  display: none;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  font-size: 28px;
+  color: white;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .mobile-hamburger {
+    display: block;
+  }
+}
+
+
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100%;
+  background: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  transition: right 0.3s ease;
+  z-index: 9998;
+}
+
+.mobile-menu a {
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid #222;
+}
+
+.mobile-socials {
+  margin-top: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 22px;
+}
+
+.mobile-menu.show {
+  right: 0;
+}
+
+
+/* =========================
+   MOBILE CONTACT STRIP
+========================= */
+.mobile-contact-strip {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-contact-strip {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 14px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .mobile-contact-strip a {
+    font-size: 22px;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  .mobile-contact-strip a:hover {
+    color: #ff3b3b;
+    transform: scale(1.15);
+  }
+}
+
+
+
+/* =========================
+   FOOTER STYLING
+========================= */
+.site-footer {
+  background: #2b2b2b;
+  color: #ccc;
+  margin-top: 60px;
+  font-size: 15px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.footer-col h3 {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-col p {
+  line-height: 1.6;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+  color: #ffffff;
+}
+
+/* Social Icons */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.footer-socials a {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #555;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  transition: 0.3s ease;
+}
+
+.footer-socials a:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* Icons inside address */
+.footer-col i {
+  margin-right: 8px;
+}
+
+/* Bottom Bar */
+.footer-bottom {
+  border-top: 1px solid #444;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  background: #222;
+}
+
+.footer-bottom span {
+  color: #ff3b3b;
+  font-weight: bold;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-socials {
+    justify-content: center;
+  }
+}
 
   </style>
 </head>
@@ -628,6 +895,23 @@
   <!-- HEADER -->
 <div class="header">
 
+  <!-- TOP BAR (Desktop only) -->
+<div class="top-bar">
+  <div class="top-left">
+    📧 deoriataekwondo@gmail.com | 📞 +91 99956 04020
+  </div>
+
+  <div class="top-right">
+  <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+  <a href="#" title="Twitter"><i class="fab fa-x-twitter"></i></a>
+  <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+  <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+  <a href="#" title="Search"><i class="fas fa-magnifying-glass"></i></a>
+</div>
+
+</div>
+
+
   <div class="dragon-logo-container">
     <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/right%20faced%20dragon.png" class="dragon-circle">
     <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/a56c0ac4-a6a0-4b51-a197-9ccc21ee9bd9.png" class="main-logo">
@@ -636,8 +920,37 @@
 
   <h1>Deoria Taekwondo</h1>
   <p>Feel the Power. Embrace the Discipline.</p>
+<!-- 📱 MOBILE CONTACT STRIP -->
+<!-- 📱 MOBILE SOCIAL STRIP -->
+<div class="mobile-contact-strip">
+  <a href="https://facebook.com" aria-label="Facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://twitter.com" aria-label="Twitter">
+    <i class="fab fa-x-twitter"></i>
+  </a>
+  <a href="mailto:deoriataekwondo@gmail.com" aria-label="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+  <a href="https://youtube.com" aria-label="YouTube">
+    <i class="fab fa-youtube"></i>
+  </a>
+</div>
+
 
 </div>
+
+
+<!-- desktop nav button   -->
+<nav class="desktop-nav">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Registration</a>
+  <a href="#">News</a>
+  <a href="#">Events</a>
+  <a href="#">Gallery</a>
+  <a href="#">Contact</a>
+</nav>
 
 
 
@@ -1302,6 +1615,100 @@ const coachObserver = new IntersectionObserver(
 
 coachObserver.observe(coachSection);
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.getElementById("mobileHamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  hamburger.addEventListener("click", () => {
+    mobileMenu.classList.toggle("show");
+  });
+});
+
+
+
   </script>
+
+
+  <div class="mobile-hamburger" id="mobileHamburger">☰</div>
+
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Registration</a>
+  <a href="#">News</a>
+  <a href="#">Events</a>
+  <a href="#">Gallery</a>
+  <a href="#">Contact</a>
+
+  <div class="mobile-socials">
+    <a href="#">📘</a>
+    <a href="#">📸</a>
+    <a href="#">▶️</a>
+    <span>🔍</span>
+  </div>
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+<footer class="site-footer">
+
+  <div class="footer-container">
+
+    <!-- FOLLOW US -->
+    <div class="footer-col">
+      <h3>FOLLOW US</h3>
+      <p>
+        Follow us on social media to stay updated with our
+        latest news, events, and achievements.
+      </p>
+
+      <div class="footer-socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="footer-col">
+      <h3>QUICK LINKS</h3>
+      <ul>
+        <li><a href="#">Athlete Registration</a></li>
+        <li><a href="#">Club Registration</a></li>
+        <li><a href="#">Championship Registration</a></li>
+        <li><a href="#">Events Calendar</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="footer-col">
+      <h3>ADDRESS</h3>
+
+      <p><i class="fas fa-map-marker-alt"></i>  
+        Example Sports Complex,<br>
+        Main Road, Sample Area,<br>
+        City – 123456
+      </p>
+
+      <p><i class="fas fa-phone"></i> +91 99999 88888</p>
+      <p><i class="fas fa-envelope"></i> example@email.com</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER BOTTOM -->
+  <div class="footer-bottom">
+    Designed & Developed by <span>Your Name</span> © 2025  
+    All Rights Reserved.
+  </div>
+
+</footer>
+
 </body>
 </html>
