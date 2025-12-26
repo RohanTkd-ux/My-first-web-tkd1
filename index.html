@@ -410,7 +410,7 @@
   overflow: hidden;
   cursor: pointer;
 
-  opacity: 0;
+  opacity: 1;
   transform: scale(0.8) translateY(50px);
   transition:
     opacity 1.6s ease,
@@ -875,6 +875,75 @@
   }
 }
 
+
+/* 🎥 Single Video Card Style */
+.single-video-card {
+  grid-template-columns: 1fr;   /* one image only */
+}
+
+/* Background image */
+.single-bg-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+/* Play Icon */
+.play-icon {
+  width: 70px;
+  height: 70px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+.play-icon i {
+  color: white;
+  font-size: 28px;
+  margin-left: 4px; /* play icon optical centering */
+}
+
+/* Hover effect */
+.single-video-card:hover .play-icon {
+  transform: scale(1.1);
+  background: rgba(0,0,0,0.75);
+}
+
+
+
+/* 🎥 VIDEO GRID */
+.gallery-grid video {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  cursor: pointer;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+
+/* 📱 Center gallery images perfectly on mobile */
+@media (max-width: 768px) {
+  .gallery-grid {
+    justify-items: center;   /* centers items horizontally */
+  }
+
+  .gallery-grid img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
+
+
   </style>
 </head>
 <body>
@@ -1027,6 +1096,16 @@
 =============================== -->
 <div class="wt-slider">
   
+   <div class="wt-slide active">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/Priyankatkd.jpeg" class="wt-img">
+    <div class="wt-caption">
+      <h2>Your Title 1</h2>
+      <p>Your description 1</p>
+    </div>
+  </div>
+
+ \
+  
   <!-- Slide 1 -->
   <div class="wt-slide active">
     <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/WhatsApp%20Image%202025-11-22%20at%2011.00.59_4f76d1b3.jpg" class="wt-img">
@@ -1081,10 +1160,10 @@
 <!-- 📸 PHOTO SECTION BUTTON -->
 <section class="photo-entry">
   <div class="photo-card" id="photosBtn">
-    <img src="https://picsum.photos/300/200?11">
-    <img src="https://picsum.photos/300/200?12">
-    <img src="https://picsum.photos/300/200?13">
-    <img src="https://picsum.photos/300/200?14">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img24.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img16.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img30.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img3.jpeg">
     <div class="photo-overlay">
       <h2>📸 Training Gallery</h2>
       <p>Tap to explore moments</p>
@@ -1094,6 +1173,26 @@
 
 
 </section>
+
+<!-- 🎥 VIDEO SECTION BUTTON -->
+<section class="photo-entry">
+  <div class="photo-card single-video-card" id="videosBtn">
+
+    <!-- Background Image -->
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/WhatsApp%20Image%202025-11-22%20at%2013.12.42_0cde66b9.jpg" class="single-bg-img">
+
+    <!-- Overlay -->
+    <div class="photo-overlay">
+      <div class="play-icon">
+        <i class="fas fa-play"></i>
+      </div>
+      <h2>Training Videos</h2>
+      <p>Watch matches & practice clips</p>
+    </div>
+
+  </div>
+</section>
+
 
 <!-- 🌍 MODERN OLYMPIC TAEKWONDO SECTION -->
 <section class="olympic-modern" style="
@@ -1207,25 +1306,7 @@
 </section>
 
 
-    <div class="taekwondo-animations">
-      <h2>🔥 Taekwondo in Action</h2>
-
-      <div class="move">
-        <img src="https://tse4.mm.bing.net/th/id/OIF.ay5mwK5Ax86CC1agVtkFvw?rs=1&pid=ImgDetMain&o=7&rm=3" alt="High Kick" />
-        <p>Spinning High Kick</p>
-      </div>
-
-      <div class="move">
-        <img src="https://tse4.mm.bing.net/th/id/OIP.SyKtwJmmXgdQjg-3zLiagwHaI4?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Punch Combo" />
-        <p>Fast Punch Combo</p>
-      </div>
-
-      <div class="move">
-        <img src="https://tse3.mm.bing.net/th/id/OIP.cPt4vN-SKBhrR6Cf8LMkhgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Side Kick" />
-        <p>Jump Side Kick</p>
-      </div>
-    </div>
-
+    
     <div class="info-section">
       <h2>What is Taekwondo?</h2>
       <p>
@@ -1373,17 +1454,70 @@
 
  <div class="history-section gallery-wrapper">
   <div class="gallery-grid">
-    <img src="https://picsum.photos/600/400?1">
-    <img src="https://picsum.photos/600/400?2">
-    <img src="https://picsum.photos/600/400?3">
-    <img src="https://picsum.photos/600/400?4">
-    <img src="https://picsum.photos/600/400?5">
-    <img src="https://picsum.photos/600/400?6">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img1.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img2.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img3.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img4.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img5.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img6.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img7.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img8.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img9.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img10.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img11.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img12.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img13.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img14.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img15.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img16.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img17.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img18.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img20.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img21.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img22.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img23.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img24.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img25.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img26.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img27.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img28.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img29.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img30.jpeg">
+    <img src="https://raw.githubusercontent.com/RohanTkd-ux/web-Photos/refs/heads/main/img31.jpeg">
+    
   </div>
 </div>
 
 
   <a href="#" class="back-btn" id="backBtnPhotos">⬅ Back to Home</a>
+</div>
+
+<!-- VIDEO GALLERY PAGE -->
+<div id="videosPage" class="history-page" style="display:none;">
+  <div class="header">
+    <h1>🎥 Training Videos</h1>
+    <p>Match clips, practice sessions & highlights</p>
+  </div>
+
+  <div class="history-section">
+    <div class="gallery-grid">
+
+      <video controls preload="metadata">
+        <source src="https://res.cloudinary.com/dl4pvlmzt/video/upload/v1766046064/download_dxaewa.mp4" type="video/mp4">
+      </video>
+
+      <video controls preload="metadata">
+        <source src="YOUR_VIDEO_URL_2.mp4" type="video/mp4">
+      </video>
+
+      <video controls preload="metadata">
+        <source src="YOUR_VIDEO_URL_3.mp4" type="video/mp4">
+      </video>
+
+    </div>
+  </div>
+
+  <a href="#" class="back-btn" id="backBtnVideos">⬅ Back to Home</a>
 </div>
 
   <!-- IMAGE POPUP -->
@@ -1538,7 +1672,7 @@ function switchPage(hide, show, pageName) {
 history.replaceState({ page: "home" }, "", "#home");
 
 window.addEventListener("popstate", (event) => {
-  [mainPage, historyPage, deoriaPage, domainsPage, photosPage].forEach(p => {
+  [mainPage, historyPage, deoriaPage, domainsPage, photosPage, videosPage].forEach(p => {
     p.style.display = "none";
     p.classList.remove("active");
   });
@@ -1563,6 +1697,11 @@ window.addEventListener("popstate", (event) => {
     photosPage.style.display = "block";
     photosPage.classList.add("active");
   }
+  else if (event.state.page === "videos") {
+  videosPage.style.display = "block";
+  videosPage.classList.add("active");
+}
+
 });
 
 const photosBtn = document.getElementById("photosBtn");
@@ -1623,6 +1762,22 @@ document.addEventListener("DOMContentLoaded", () => {
   hamburger.addEventListener("click", () => {
     mobileMenu.classList.toggle("show");
   });
+});
+
+
+const videosBtn = document.getElementById("videosBtn");
+const videosPage = document.getElementById("videosPage");
+const backBtnVideos = document.getElementById("backBtnVideos");
+
+/* Open video page */
+videosBtn.addEventListener("click", () => {
+  switchPage(mainPage, videosPage, "videos");
+});
+
+/* Back button */
+backBtnVideos.addEventListener("click", e => {
+  e.preventDefault();
+  history.back();
 });
 
 
